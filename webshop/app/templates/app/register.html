@@ -1,0 +1,86 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image:url('{% static "app/images/back.jpg" %}');
+        }
+        .register-container {
+            width: 500px;
+            height: 700px;
+            padding: 16px;
+            background-color: rgb(185, 185, 212);
+            margin: 0 auto;
+            margin-top: 100px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type=text], input[type=password],input[type=email] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        
+        #id_email{
+            width: 500px;
+            height: 40px;
+        }
+        button {
+            background-color:rgb(102, 230, 100);
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+<form class="form_register" method="POST" action="">
+    {% csrf_token %}
+    <div class="register-container">
+        <img src="{% static "app/images/logov.jpg" %}" alt="Ảnh" style="padding-left: 150px;width: 200px;">
+        <br>
+
+        <label for="uname"><b>Tài Khoản</b></label>
+        {{form.username}}
+
+        <label for="email" ><b>Email</b></label>
+        {{form.email}}
+
+        <label for="ho"><b>Họ</b></label>
+        {{form.first_name}}
+
+        <label for="ten"><b>Tên</b></label>
+        {{form.last_name}}
+
+        <label for="psw"><b>Mật Khẩu</b></label>
+        {{form.password1}}
+
+        <label for="psw1"><b>Nhập Lại Mật Khẩu</b></label>
+        {{form.password2}}
+
+        <p style="padding-left: 130px;">Tôi Đã Có Tài Khoản . <a href="{% url 'login' %}">Đăng Nhập</a></p>
+        <button type="submit" style="color: blue;">Đăng Ký</button>
+    </div>
+</form>
+    <!-- <h5>Register</h5>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" name = 'Create User'>
+    </form> -->
+</body>
+</html>
+
+    
+   

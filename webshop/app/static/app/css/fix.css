@@ -1,0 +1,12 @@
+/* Baner_slide */
+#carouselExampleFade{
+    padding-left: 80px;
+    padding-top: 40px;
+}
+.carousel-control-prev{
+    padding-top: 60px;
+}
+.carousel-control-next{
+    padding-top: 60px; 
+}
+

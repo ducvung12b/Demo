@@ -1,0 +1,53 @@
+{% extends "app/base.html" %}
+{%load static%}
+
+{% block content_edit %}
+
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="fw-bold">Edit Product</h2>
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="" class="form-label">username</label>
+                                <input type="text" Required name="username" value="{{customer.username }}" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">email</label>
+                                <input type="text" Required name="email" value="{{customer.email}}" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">first_name</label>
+                                <input type="text" Required name="first_name" value="{{customer.first_name}}" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">last_name</label>
+                                <input type="text" Required name="last_name" value="{{customer.last_name}}" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">password1</label>
+                                <input type="text" Required name="password1" value="{{customer.password1}}" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">password2</label>
+                                <input type="text" Required name="password2" value="{{customer.password2}}" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-warning">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content_edit %}
+
+
+    
+   

@@ -1,0 +1,171 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block cart_content %}
+<link href="{% static "app/css/detail.css" %}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+
+    .checked {
+      color: orange;
+    }
+      .rating {
+      margin-top: 40px;
+      border: none;
+      float: left;
+    
+    }
+    
+    .rating > label {
+       color: #9C9C9C;
+      font-size: 7px;
+      float:right;
+    }
+    
+    
+    .rating > label:before {
+      margin: 5px;
+      font-size: 2em;
+      font-family: FontAwesome;
+      content: "\f005";
+      display: inline-block;
+    }
+    
+    .rating > input {
+      display: none;
+    }
+    
+    .rating > input:checked ~ label,
+    .rating:not(:checked) > label:hover,
+    .rating:not(:checked) > label:hover ~ label {
+      color: #F79426;
+    }
+    
+    .rating > input:checked + label:hover,
+    .rating > input:checked ~ label:hover,
+    .rating > label:hover ~ input:checked ~ label,
+    .rating > input:checked ~ label:hover ~ label {
+      color: #FECE31;
+    }
+    
+    
+    #star{
+    font-size: 10px;
+    color:grey;
+    }
+    
+    #check-star{
+    font-size: 10px;
+    }
+    
+    </style>
+{%for product in products%} 
+<div class="container">
+    <div class="card">
+        <div class="roww" >
+			<a  class="btn btn-outline-dark" href="{% url 'home' %}">&#x2190; Continue Shopping</a>
+			<br>
+			<br>
+			<table class="table">
+				<tr>
+						<a  style="float:right;" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
+					</th>
+				</tr>
+			</table>
+
+		</div>
+        <div class="container-fliud">
+            <div class="wrapper row">
+                <div class="preview col-md-6">
+                    <div class="preview-pic tab-content">
+                      <div class="tab-pane active" id="pic-1"><img style='width:400px;height:400px' src="{{product.ImageURL}}" /></div>  
+                    </div>	
+                </div>
+                <div class="details col-md-6">
+                    <h3 class="product-title">{{product.name}}</h3>
+                    <div class="rating">        
+                    </div>
+                    <p class="product-description">{{product.describe}}</p>
+                    
+                    <div class="action" style='padding-top:180px'>
+                        <h4 class="price">current price: {{product.price}}00.VND</h4>
+                        <button data-product={{product.id}} data-action="add" class="add-to-cart btn btn-default update-cart" type="button">add to cart</button>
+                        <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--REVIEW -->
+
+<div class="card">
+    <h3>Đánh Giá Sản Phẩm</h3>
+{% for x in reviews%}
+<p>{{ x.user }}</p>
+<p>{{ x.review_desp }}</p>
+
+ {% if x.rating > 0 %}
+                  <i class="fa fa-star {% if x.rating  < 1 %} no-checked {% else %} checked {% endif %} " id="check-star"></i>
+                  <i class="fa fa-star {% if x.rating  < 2 %} no-checked {% else %} checked {% endif %} " id="check-star"></i>
+                  <i class="fa fa-star {% if x.rating  < 3 %} no-checked {% else %} checked {% endif %} " id="check-star"></i>
+                  <i class="fa fa-star {% if x.rating  < 4 %} no-checked {% else %} checked {% endif %} " id="check-star"></i>
+                  <i class="fa fa-star {% if x.rating  < 5 %} no-checked {% else %} checked {% endif %} " id="check-star"></i>
+                <hr>
+                {% else %}
+
+                 <i class="fa fa-star " id="star"></i>
+                 <i class="fa fa-star" id="star"></i>
+                 <i class="fa fa-star" id="star"></i>
+                 <i class="fa fa-star" id="star"></i>
+                 <i class="fa fa-star" id="star"></i>
+                        &nbsp;<span>No ratings</span>
+
+                <hr>
+
+                {% endif %}
+{% endfor %}
+<form method="POST" action="">
+    {% csrf_token %}
+
+  <div class="col-md-6">
+                <p style="font-weight:600;">Viết Đánh Giá</p>
+                <form method="POST">
+                    {% csrf_token %}
+
+                           <div class="form-group required">
+                      <div class="rating">
+
+                          <input type="radio" id="star5" name="rating" value="5" />
+                          <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
+                          <input type="radio" id="star4" name="rating" value="4" />
+                          <label class="star" for="star4" title="Great" aria-hidden="true"></label>
+                          <input type="radio" id="star3" name="rating" value="3" />
+                          <label class="star" for="star3" title="Very good" aria-hidden="true"></label>
+                          <input type="radio" id="star2" name="rating" value="2" />
+                          <label class="star" for="star2" title="Good" aria-hidden="true"></label>
+                          <input type="radio" id="star1" name="rating" value="1" />
+                          <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
+
+                        </div>
+                    </div>
+
+                    </div>
+                    <textarea name="item_review"  placeholder="Viết" rows="6" cols="50" id="review-text" required></textarea>
+                    <br>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+
+                          <input type="submit"  class="btn btn-primary mt-2" value="POST">
+<!-- col finish-->
+
+
+                </div>
+
+                </form>
+            </div>
+<!--            rate review col-->
+</div>  
+{% endfor %}
+{% endblock cart_content %}

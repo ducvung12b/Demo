@@ -1,0 +1,23 @@
+{% extends "view/viewbase.html" %}
+{%load static%}
+{% block viewbanner_slider %}
+
+<h4 style='padding-top:30px'>Bạn Đang Tìm Kiếm : {{searched}}</h4> <br/>
+
+<div class="row">
+    {% for product in checks %}    
+      <div class="col-lg-3" style='padding-top: 20px;'>
+          <img class="thumbnail" src="{{product.ImageURL}}" alt="Iphone 15 Pro Max" style="width: 317px;">
+          <div class="box-element">
+              <h6>{{product.name}}</h6>
+              <hr>
+              <!-- Js add cart -->
+              <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart"  >Them Vao Gio Hang </button>   
+              <a class="btn btn-outline-success" href="#">Xem</a>
+              <h6 class=" display: inline-block; float:right ;"><strong>{{product.price}}00.VND</strong></h6>
+          </div>
+      </div> 
+    {% endfor %}
+</div><br/>
+
+{% endblock viewbanner_slider %}
